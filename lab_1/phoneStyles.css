@@ -1,5 +1,8 @@
-.wrapper{
-	height: 150px;
+.header{
+	height: 60px;
+}
+.footer{
+	height: 60px;
 }
 .menu{
 	height: 30%;
@@ -8,4 +11,5 @@
 .content{
 	height: 65%;
 }
+
 .
