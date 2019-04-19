@@ -1,0 +1,35 @@
+header{
+	background: url(images/pic.jpg);
+	background-size: cover;
+}
+header p{
+	color: white;
+}
+header h1{
+	color: white;
+}
+header li{
+	color: white;
+}
+#longdesc{
+	background: #32CD32;
+}
+#contact{
+	background: #E0FFFF;
+}
+.custom-btn{
+	color: #fff; 
+	text-decoration: none; 
+	user-select: none; 
+	background: rgb(212,75,56); 
+	padding: .7em 1.5em; 
+	outline: none; 
+	border-radius: 1px;
+	margin-top: 70px;
+}
+.footer{
+	padding-bottom: 50px;
+}
+p{
+	text-indent: 20px;
+}
