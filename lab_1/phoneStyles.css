@@ -9,13 +9,17 @@
 	width: 100%;
 	background-color: red;
 }
-.content{
+.wrapper{
 	width: 100%;
 	height: 900px;
 }
-.wall{
+.content{
 	width: 100%;
-	height: 100%;
+	height: 75%
+}
+.wall{
+	width: 95%;
+	height: 95%;
 	float: none;
 	margin: 5px;
 }
