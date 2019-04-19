@@ -1,0 +1,44 @@
+.header{
+	background-color: blue;
+	height: 100px;
+}
+.footer{
+	background-color: blue;
+	height: 100px;
+}
+.wrapper{
+	background-color: Gray; 
+	height: 500px;
+}
+.menu{
+	float: left;
+	height: 80%;
+	width: 20%;
+	background-color: yellow;
+	margin: 5px;
+}
+.content{
+	float: right;
+	width: 78%;
+	height: 80%;
+	margin: 5px;
+}
+.wall{
+	float: left;
+	width: 79%;
+	height: 100%;
+	background-color: White;
+}
+.friends{
+	float: right;
+	width : 20%;
+	height: 100%;
+	background-color: Yellow;
+	margin-left: 5px;
+}
+.footer{
+	margin-bottom: -10px;
+}
+p{
+	margin: 5px;
+}
