@@ -7,7 +7,7 @@
 .menu{
 	height: 30%;
 	width: 90%;
-	background-color: red;
+	background-color: white;
 }
 .wrapper{
 	width: 100%;
@@ -19,7 +19,7 @@
 }
 .wall{
 	width: 90%;
-	height: 65%;
+	height: 60%;
 	float: none;
 	margin: 5px;
 }
