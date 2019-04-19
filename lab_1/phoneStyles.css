@@ -26,4 +26,5 @@
 }
 .friends{
 	display: none;
+	position: absolute;
 }
