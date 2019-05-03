@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>ThirdLab</title>
+</head>
+
+<body>
+    <script>
+			var text;
+            var canvas = document.createElement('canvas');
+            canvas.id = 'canvas';
+            canvas.width = 700;
+            canvas.height = 500;
+            document.body.appendChild(canvas);
+			
+            var ctx = canvas.getContext("2d");
+			var a, b, c, d = false;
+			var randomImageIndex;
+			
+			function drowPics(){
+				var x = Math.round(Math.random() * ((canvas.width * (2/3)) - (canvas.width * (1/3))) + (canvas.width * (1/3))),
+				y = Math.round(Math.random() * ((canvas.height * (2/3)) - (canvas.height * (1/3))) + (canvas.height * (1/3))),
+				photoSizes = [
+					[x, y],
+					[canvas.width - x, y],
+					[x, canvas.height - y],
+					[canvas.width - x, canvas.height - y],
+				],
+				photoPins = [
+					[0, 0],
+					[x, 0],
+					[0, y],
+					[x, y],
+				];
+			
+			
+				var img1 = new Image();
+				randomImageIndex = Math.floor(Math.random() * 1200);
+				img1.src = 'https://source.unsplash.com/collection/539527/' + String(photoSizes[0][0]) + 'x' + String(photoSizes[0][1]) + '/?sig=' + randomImageIndex;
+				img1.onload = function(){
+					ctx.drawImage(img1, photoPins[0][0], photoPins[0][1]);
+					a = true;
+					check(a,b,c,d);
+				}
+				var img2 = new Image();
+				randomImageIndex = Math.floor(Math.random() * 1200);
+				img2.src = 'https://source.unsplash.com/collection/539527/' + String(photoSizes[1][0]) + 'x' + String(photoSizes[1][1]) + '/?sig=' + randomImageIndex;
+				img2.onload = function(){
+					ctx.drawImage(img2, photoPins[1][0], photoPins[1][1]);
+					b = true;
+					check(a,b,c,d);
+				}
+				var img3 = new Image();
+				randomImageIndex = Math.floor(Math.random() * 1200);
+				img3.src = 'https://source.unsplash.com/collection/539527/' + String(photoSizes[2][0]) + 'x' + String(photoSizes[2][1]) + '/?sig=' + randomImageIndex;
+				img3.onload = function(){
+					ctx.drawImage(img3, photoPins[2][0], photoPins[2][1]);
+					c = true;
+					check(a,b,c,d);
+				}
+				var img4 = new Image();
+				randomImageIndex = Math.floor(Math.random() * 1200);
+				img4.src = 'https://source.unsplash.com/collection/539527/' + String(photoSizes[3][0]) + 'x' + String(photoSizes[3][1]) + '/?sig=' + randomImageIndex;
+				img4.onload = function(){
+					ctx.drawImage(img4, photoPins[3][0], photoPins[3][1]);
+					d = true;
+					check(a,b,c,d);
+				}
+				
+				addScript("https://api.forismatic.com/api/1.0/?method=getQuote&format=jsonp&lang=en&jsonp=parseText");
+			}
+			
+			
+			function check(a, b, c, d){
+				if (a && b && c && d){
+					printText();
+				}
+			}
+			
+			function addScript(source) {
+				var script = document.createElement("script");
+				script.src = source;
+				document.head.appendChild(script);
+			}
+			
+			function parseText(response) {
+				text = response.quoteText;
+			}
+			
+			function printText(){
+				var canvas = document.getElementById("canvas")
+				var context = canvas.getContext("2d");
+				context.font = "20px Arial";
+				context.fillStyle = "rgba(0, 0, 0, 0)";
+				context.fillRect(0, 0, canvas.width, canvas.height);
+				context.fillStyle = "white"
+				var maxWidth = 500;
+				var lineHeight = 24;
+				context.textAlign = "left";
+				wrapText(context, text, maxWidth, lineHeight);
+			}
+			
+			function wrapText(context, text, maxWidth, lineHeight) {
+				var line = "";
+				var words = [];
+				var lines = [];
+
+				words = this.text.split(" ");
+				for (var i = 0; i < words.length; i++) {
+					var testLine = line + words[i] + " ";
+					var testWidth = context.measureText(testLine).width;
+					if (testWidth > maxWidth) {
+						lines.push(line);
+						line = words[i] + " ";
+					}
+					else {
+						line = testLine;
+					}
+				}
+				lines.push(line);
+				var totalHeight = lines.length * lineHeight;
+				var fstMarginTop = (500 - totalHeight) / 2;
+				var marginLeft = (700 - context.measureText(lines[0]).width) / 2;
+				context.fillText(lines[0], marginLeft, fstMarginTop);
+				var marginTop = fstMarginTop + lineHeight;
+				for (var k = 1; k < lines.length; k++) {
+					marginLeft = (700 - context.measureText(lines[k]).width) / 2;
+					context.fillText(lines[k], marginLeft, marginTop);
+					marginTop += lineHeight;
+				}
+			}
+			
+			var buttons = document.createElement("div");
+			buttons.style.display = "flex";
+			buttons.style.justifyContent = "center";
+			buttons.style.alignItems = "center";
+			document.body.appendChild(buttons);
+			
+			var upd = document.createElement("button");
+			upd.innerHTML = "New";
+			upd.style.margin = "7px";
+			upd.style.background = "red";
+			upd.style.color = "white";
+			buttons.appendChild(upd);
+			upd.onclick = function() {
+				context = canvas.getContext("2d");
+				context.clearRect(0, 0, canvas.width, canvas.height);
+				drowPics();
+			}
+			
+			var download = document.createElement("button");
+			download.innerHTML = "Download";
+			download.style.margin = "7px";
+			download.style.background = "red";
+			download.style.color = "white";
+			buttons.appendChild(download);
+			download.onclick = function() {
+				var dataURL = canvas.toDataURL();
+				console.log(dataURL);
+				var link = document.createElement("a");
+				link.setAttribute("href", dataURL);
+				link.setAttribute("download", "canvasImage");
+				link.click();
+			}
+			
+			drowPics();
+			
+    </script>
+</body></html>
