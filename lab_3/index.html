@@ -2,12 +2,12 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <title>ThirdLab</title>
+	<meta charset="UTF-8">
+	<title>ThirdLab</title>
 </head>
 
 <body>
-    <script>
+	<script>
 		var text;
 		var canvas = document.createElement('canvas');
 		canvas.id = 'canvas';
@@ -18,6 +18,25 @@
 		var ctx = canvas.getContext("2d");
 		var a, b, c, d = false;
 		var randomImageIndex;
+		
+		var buttons = document.createElement("div");
+		buttons.style.display = "flex";
+		buttons.style.justifyContent = "center";
+		buttons.style.alignItems = "center";
+		document.body.appendChild(buttons);
+		
+		var upd = document.createElement("button");
+		upd.innerHTML = "New";
+		upd.style.margin = "7px";
+		upd.style.background = "red";
+		upd.style.color = "white";
+		buttons.appendChild(upd);
+		upd.onclick = function() {
+			context = canvas.getContext("2d");
+			context.clearRect(0, 0, canvas.width, canvas.height);
+			drowPics();
+		}
+		
 		var download = document.createElement("button");
 		download.innerHTML = "Download";
 		download.style.margin = "7px";
@@ -142,24 +161,6 @@
 					context.fillText(lines[k], marginLeft, marginTop);
 					marginTop += lineHeight;
 				}
-			}
-			
-			var buttons = document.createElement("div");
-			buttons.style.display = "flex";
-			buttons.style.justifyContent = "center";
-			buttons.style.alignItems = "center";
-			document.body.appendChild(buttons);
-			
-			var upd = document.createElement("button");
-			upd.innerHTML = "New";
-			upd.style.margin = "7px";
-			upd.style.background = "red";
-			upd.style.color = "white";
-			buttons.appendChild(upd);
-			upd.onclick = function() {
-				context = canvas.getContext("2d");
-				context.clearRect(0, 0, canvas.width, canvas.height);
-				drowPics();
 			}
 			
 			drowPics();
